@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import UserTable from "../components/UserTable/UserTable";
 import Pagination from "../components/Pagination/Pagination";
 import DashboardLayout from "../layouts/DashboardLayout";
 import TableHeaderAction from "../components/TableHeaderAction";
+import StudentTable from "../components/UserTable/StudentTable";
 
-const UserManagement = () => {
+const StudentManagement = () => {
     const [selectedUsers, setSelectedUsers] = useState([]);
     const [isRest, setIsRest] = useState(false);
     const [localPageSize, setLocalPageSize] = useState(5);
@@ -18,7 +18,7 @@ const UserManagement = () => {
                 </p>
             </div>
             <TableHeaderAction setIsRest={setIsRest} setLocalPageSize={setLocalPageSize} />
-            <UserTable
+            <StudentTable
                 selectedUsers={selectedUsers}
                 setSelectedUsers={setSelectedUsers}
                 isRest={isRest}
@@ -33,4 +33,4 @@ const UserManagement = () => {
     );
 };
 
-export default UserManagement;
+export default StudentManagement;

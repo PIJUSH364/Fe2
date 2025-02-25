@@ -21,7 +21,7 @@ import API_URLS from "../../utils/constant/UrlConstant";
 import { CustomSkelton } from "../CustomSkelton";
 import CreateMarkModel from "../common/modal/CreateMarkModel";
 
-const UserTable = ({ selectedUsers, setSelectedUsers, isRest }) => {
+const StudentTable = ({ selectedUsers, setSelectedUsers, isRest }) => {
     const [sortByDesc, setSortByDesc] = useState(true);
     const [shouldShow, setShouldShow] = useState(false);
     const [menuIndex, setMenuIndex] = useState(-1);
@@ -29,7 +29,7 @@ const UserTable = ({ selectedUsers, setSelectedUsers, isRest }) => {
 
     const dispatch = useDispatch();
     const { fetchUser } = useFetchUsers();
-    const users = useSelector((state) => state.user.userList);
+    const students = useSelector((state) => state.user.userList);
     const userDetails = useSelector((state) => state.user.userDetails);
     const userDataLoader = useSelector((state) => state.user.userDataLoader);
     const searchValue = useSelector((state) => state.user.searchValue);
@@ -45,7 +45,7 @@ const UserTable = ({ selectedUsers, setSelectedUsers, isRest }) => {
     } = useSelector((state) => state.user.allModalStatus);
 
     const handleSort = () => {
-        const data = [...users].sort((a, b) =>
+        const data = [...students].sort((a, b) =>
             sortByDesc
                 ? new Date(a.updatedAt) - new Date(b.updatedAt)
                 : new Date(b.updatedAt) - new Date(a.updatedAt)
@@ -67,7 +67,7 @@ const UserTable = ({ selectedUsers, setSelectedUsers, isRest }) => {
 
     const handleAllSelect = () => {
         setSelectedUsers((prev) =>
-            prev.length === users.length ? [] : [...users.map((user) => user.id)]
+            prev.length === students.length ? [] : [...students.map((user) => user.id)]
         );
     };
 
@@ -77,7 +77,7 @@ const UserTable = ({ selectedUsers, setSelectedUsers, isRest }) => {
     }, []);
 
     useEffect(() => {
-        if (selectedUsers.length === users.length && selectedUsers.length > 0) {
+        if (selectedUsers.length === students.length && selectedUsers.length > 0) {
             dispatch(
                 setModalStatus({ key: allModalStatus.BULK_DELETE_USER, value: true })
             );
@@ -190,7 +190,7 @@ const UserTable = ({ selectedUsers, setSelectedUsers, isRest }) => {
                     <CustomSkelton />
                 ) : (
                     <>
-                        {users?.length > 0 ? (
+                        {students?.length > 0 ? (
                             <table className="min-w-full table-fixed border-collapse">
                                 {/* Sticky Header */}
                                 <thead className="sticky top-0  z-10 shadow-sm">
@@ -198,13 +198,13 @@ const UserTable = ({ selectedUsers, setSelectedUsers, isRest }) => {
                                         {/* <th className="p-3 rounded-tl-lg ">
                                             <input
                                                 type="checkbox"
-                                                checked={selectedUsers.length === users.length}
+                                                checked={selectedUsers.length === students.length}
                                                 onChange={handleAllSelect}
                                                 className="w-4 h-4 cursor-pointer"
                                             />
                                         </th> */}
                                         <th className="p-3 font-nunito whitespace-nowrap">
-                                            User Name
+                                            Student Name
                                         </th>
                                         <th className="p-3 font-nunito text-left">Email</th>
 
@@ -235,7 +235,7 @@ const UserTable = ({ selectedUsers, setSelectedUsers, isRest }) => {
 
                                 {/* Scrollable Table Body */}
                                 <tbody className=" overflow-y-auto max-h-[300px] w-full cursor-pointer">
-                                    {users.map((user) => (
+                                    {students.map((user) => (
                                         <UserRow user={user} setShouldShow={setShouldShow} />
                                     ))}
                                 </tbody>
@@ -250,4 +250,4 @@ const UserTable = ({ selectedUsers, setSelectedUsers, isRest }) => {
     );
 };
 
-export default UserTable;
+export default StudentTable;

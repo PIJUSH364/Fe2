@@ -6,21 +6,21 @@ import {
   Navigate,
 } from "react-router-dom";
 import NotFound from "./pages/notFound/NotFound";
-import UserManagement from "./pages/UserManagement";
+import StudentManagement from "./pages/StudentManagement";
 
 const App = () => {
   return (
     <Router>
       <div role="application">
         <Routes>
-          {/* Redirect from "/" to "/users" */}
+
           <Route
             path="/"
-            element={<Navigate to="/users" replace />}
+            element={<Navigate to="/student" replace />}
           />
 
-          {/* User Management Page */}
-          <Route path="/users" element={<UserManagement />} />
+          {/* Student Management Page */}
+          <Route path="/student" element={<StudentManagement />} />
 
           {/* Catch-all for unknown routes */}
           <Route path="*" element={<Navigate to="/not-found" replace />} />

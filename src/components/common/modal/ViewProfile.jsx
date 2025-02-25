@@ -8,7 +8,7 @@ import CloseModel from "./CloseModel";
 
 export default function ViewProfile({ setShouldShow }) {
     const user = useSelector((state) => state.user.userDetails);
-    const { name, email, status, createdAt, updatedAt, marks } = user;
+    const { name, email, createdAt, updatedAt, marks } = user;
 
     return (
         <div className="modalBackground flex justify-center items-center">
@@ -22,7 +22,7 @@ export default function ViewProfile({ setShouldShow }) {
                 <div className="relative mx-auto w-36 rounded-full">
                     <span
                         className={`absolute right-0 m-3 h-3 w-3 rounded-full 
-                        ${status == "active" ? "bg-green-500 ring-2 ring-green-300" : "bg-slate-400 ring-2 ring-slate-300"}  ring-offset-2`}
+                        ${"bg-green-500 ring-2 ring-green-300"}  ring-offset-2`}
                     ></span>
                     <img
                         className="mx-auto h-auto w-full rounded-full"

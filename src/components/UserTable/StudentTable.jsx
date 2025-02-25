@@ -10,7 +10,6 @@ import {
 } from "../../features/users/userSlice";
 import ViewProfile from "../common/modal/ViewProfile";
 import Modal from "../common/modal/Modal";
-import UpdateUserModel from "../common/modal/UpdateUserModel";
 import { useFetchUsers } from "../custom/Hook/useFetchUsers";
 import { useDebouncedEffect } from "../custom/Hook/useDebouncedEffect";
 import DeleteModel from "../common/modal/DeleteModel";
@@ -20,6 +19,7 @@ import axios from "axios";
 import API_URLS from "../../utils/constant/UrlConstant";
 import { CustomSkelton } from "../CustomSkelton";
 import CreateMarkModel from "../common/modal/CreateMarkModel";
+import UpdateStudentModel from "../common/modal/UpdateStudentModel";
 
 const StudentTable = ({ selectedUsers, setSelectedUsers, isRest }) => {
     const [sortByDesc, setSortByDesc] = useState(true);
@@ -30,7 +30,7 @@ const StudentTable = ({ selectedUsers, setSelectedUsers, isRest }) => {
     const dispatch = useDispatch();
     const { fetchUser } = useFetchUsers();
     const students = useSelector((state) => state.user.userList);
-    const userDetails = useSelector((state) => state.user.userDetails);
+    const studentDetails = useSelector((state) => state.user.studentDetails);
     const userDataLoader = useSelector((state) => state.user.userDataLoader);
     const searchValue = useSelector((state) => state.user.searchValue);
     const { currentPage, pageSize } = useSelector(
@@ -147,7 +147,7 @@ const StudentTable = ({ selectedUsers, setSelectedUsers, isRest }) => {
             )}
             {editUserModalStatus && (
                 <Modal shouldShow={shouldShow} setShouldShow={setShouldShow}>
-                    <UpdateUserModel
+                    <UpdateStudentModel
                         setShouldShow={setShouldShow}
                         menuIndex={menuIndex}
                         toggleMenu={toggleMenu}
@@ -179,7 +179,7 @@ const StudentTable = ({ selectedUsers, setSelectedUsers, isRest }) => {
                     <DeleteModel
                         setShouldShow={setShouldShow}
                         handleCancel={handleSingleCancel}
-                        handleDelete={() => handleDelete([userDetails?.id], false)}
+                        handleDelete={() => handleDelete([studentDetails?.id], false)}
                         isLoading={isLoading}
                     />
                 </Modal>

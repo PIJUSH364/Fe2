@@ -13,9 +13,7 @@ import API_URLS from "../../../utils/constant/UrlConstant";
 export const useFetchUsers = () => {
     const dispatch = useDispatch();
     const searchValue = useSelector((state) => state.user.searchValue);
-    const { role, status } = useSelector(
-        (state) => state.user.filterData
-    );
+
 
     const fetchUser = useCallback(
         async (pageIndex = 1, pageSize = 5) => {
@@ -23,8 +21,7 @@ export const useFetchUsers = () => {
                 dispatch(toggleUserDataLoader(true));
                 let subQuery = "";
 
-                if (role) subQuery += `&role=${role}`;
-                if (status) subQuery += `&status=${status}`;
+
                 if (searchValue) subQuery += `&search=${searchValue}`;
 
                 const defaultUrl =
@@ -45,7 +42,7 @@ export const useFetchUsers = () => {
                 dispatch(toggleUserDataLoader(false));
             }
         },
-        [searchValue, role, status, dispatch]
+        [searchValue, dispatch]
     );
 
     return { fetchUser };

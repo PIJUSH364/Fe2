@@ -17,7 +17,7 @@ import { Subjects } from "../../../utils/method/helper";
 
 const CreateMarkModel = ({ setShouldShow }) => {
     const { fetchUser } = useFetchUsers();
-    const user = useSelector((state) => state.user.userDetails);
+    const user = useSelector((state) => state.user.studentDetails);
 
     if (!user) {
         setShouldShow(false);

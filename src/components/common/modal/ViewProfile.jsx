@@ -7,8 +7,8 @@ import {
 import CloseModel from "./CloseModel";
 
 export default function ViewProfile({ setShouldShow }) {
-    const user = useSelector((state) => state.user.userDetails);
-    const { name, email, createdAt, updatedAt, marks } = user;
+    const student = useSelector((state) => state.user.studentDetails);
+    const { name, email, createdAt, updatedAt, marks } = student;
 
     return (
         <div className="modalBackground flex justify-center items-center">

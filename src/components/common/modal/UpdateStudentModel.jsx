@@ -7,17 +7,16 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useFetchUsers } from "../../custom/Hook/useFetchUsers";
 import { useDispatch, useSelector } from "react-redux";
-import SelectInputField from "../Input/SelectInputField";
 import API_URLS from "../../../utils/constant/UrlConstant";
 import {
     resetFilterValue,
     ResetPaginationMetaData,
 } from "../../../features/users/userSlice";
 
-const UpdateUserModel = ({ setShouldShow }) => {
+const UpdateStudentModel = ({ setShouldShow }) => {
     const [isLoading, setIsLoading] = useState(false);
 
-    const user = useSelector((state) => state.user.userDetails);
+    const user = useSelector((state) => state.user.studentDetails);
     const { currentPage, pageSize } = useSelector(
         (state) => state.user.paginationMetaData
     );
@@ -109,4 +108,4 @@ const UpdateUserModel = ({ setShouldShow }) => {
     );
 };
 
-export default UpdateUserModel;
+export default UpdateStudentModel;

@@ -2,7 +2,7 @@ import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
   userList: [],
-  userDetails: null,
+  studentDetails: null,
   totalPage: 0,
   totalUserCount: 0,
   userActionFlag: false,
@@ -20,11 +20,6 @@ const initialState = {
   },
   searchValue: "",
   userDataLoader: false,
-  filterData: {
-    role: "",
-    status: "",
-    search: "",
-  },
 };
 
 const userSlice = createSlice({
@@ -35,7 +30,7 @@ const userSlice = createSlice({
       state.userList = action.payload;
     },
     setUserDetails: (state, action) => {
-      state.userDetails = action.payload;
+      state.studentDetails = action.payload;
     },
     setTotalPage: (state, action) => {
       state.totalPage = action.payload;
@@ -65,9 +60,7 @@ const userSlice = createSlice({
     setSearchValue: (state, action) => {
       state.searchValue = action.payload;
     },
-    addContactMetaData: (state, action) => {
-      state.contactMetaData = action.payload;
-    },
+
     setLoaderStatus: (state, action) => {
       state.loaderStatus = action.payload;
     },
@@ -76,9 +69,6 @@ const userSlice = createSlice({
     },
     toggleUserDataLoader: (state, action) => {
       state.userDataLoader = action.payload;
-    },
-    setFilterValue: (state, action) => {
-      state.filterData[action.payload.key] = action.payload.value;
     },
     resetFilterValue: (state) => {
       state.searchValue = "";
@@ -96,7 +86,7 @@ export const {
   setSearchValue,
   toggleUserDataLoader,
   resetFilterValue,
-  setFilterValue,
+
   ResetPaginationMetaData,
   setUserDetails,
 } = userSlice.actions;

@@ -16,7 +16,7 @@ const UserRow = ({ user, setShouldShow, index }) => {
 
     async function updateUser(data) {
         try {
-            const res = await axios.put(API_URLS.USER.UPDATE, data);
+            const res = await axios.put(API_URLS.STUDENT.UPDATE, data);
             toast.success(res.data.message, {
                 position: "bottom-right",
             });

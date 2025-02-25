@@ -98,7 +98,7 @@ const UserTable = ({ selectedUsers, setSelectedUsers, isRest }) => {
         async (ids, isBulkDelete) => {
             try {
                 setIsLoading(true);
-                const response = await axios.delete(API_URLS.USER.DELETE, {
+                const response = await axios.delete(API_URLS.STUDENT.DELETE, {
                     data: { ids: [...ids] },
                 });
                 toast.success(response.data.message, { position: "bottom-right" });

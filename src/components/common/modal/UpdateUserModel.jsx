@@ -35,7 +35,7 @@ const UpdateUserModel = ({ setShouldShow }) => {
     const handleUpdateUser = (values, setSubmitting) => {
         setIsLoading((prev) => !prev);
         axios
-            .put(API_URLS.USER.UPDATE, { ...values, id })
+            .put(API_URLS.STUDENT.UPDATE, { ...values, id })
             .then(async (res) => {
                 setShouldShow(false);
                 toast.success(res.data.message, {

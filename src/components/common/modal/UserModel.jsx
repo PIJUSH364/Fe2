@@ -29,7 +29,7 @@ const UserModel = ({ setShouldShow }) => {
     const handleAddUser = (values, setSubmitting) => {
         setIsLoading((prev) => !prev);
         axios
-            .post(API_URLS.USER.CREATE, values)
+            .post(API_URLS.STUDENT.CREATE, values)
             .then(async (res) => {
                 toast.success(res.data.message, {
                     position: "bottom-right",

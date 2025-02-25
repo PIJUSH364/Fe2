@@ -74,7 +74,7 @@ const TableHeaderAction = ({
                             className="primary-bw-btn px-2 md:px-4 whitespace-nowrap"
                         >
                             <FiPlus />
-                            Add
+                            Add Student
                         </button>
 
                         {/* Reset Button */}

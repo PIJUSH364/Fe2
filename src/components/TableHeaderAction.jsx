@@ -15,7 +15,7 @@ import FilterUserModel from "./common/modal/FilterUserModel";
 import ResetButton from "./ResetButton";
 
 const TableHeaderAction = ({
-    title = "All User",
+    title = "All Students",
     setIsRest,
     setLocalPageSize,
 }) => {
@@ -101,7 +101,7 @@ const TableHeaderAction = ({
                             className="primary-bw-btn px-2 md:px-4 whitespace-nowrap"
                         >
                             <FiPlus />
-                            Add User
+                            Add
                         </button>
 
                         {/* Reset Button */}

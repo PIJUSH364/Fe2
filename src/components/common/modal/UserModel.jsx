@@ -26,7 +26,6 @@ const UserModel = ({ setShouldShow }) => {
         email: Yup.string()
             .email("Invalid email address")
             .required("Email is required"),
-        role: Yup.string().required("Role is required"),
     });
 
     const handleAddUser = (values, setSubmitting) => {
@@ -54,7 +53,7 @@ const UserModel = ({ setShouldShow }) => {
 
     return (
         <Formik
-            initialValues={{ name: "", email: "", role: "member" }}
+            initialValues={{ name: "", email: "", }}
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) => {
                 handleAddUser(values, setSubmitting);
@@ -83,12 +82,7 @@ const UserModel = ({ setShouldShow }) => {
                             type="email"
                             placeholder="Enter your Email"
                         />
-                        <SelectInputField
-                            disabled={isLoading}
-                            label="Role"
-                            name="role"
-                            optionList={Role}
-                        />
+
                         <button
                             type="submit"
                             disabled={isLoading}

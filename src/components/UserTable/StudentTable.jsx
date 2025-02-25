@@ -103,7 +103,7 @@ const StudentTable = ({ selectedUsers, setSelectedUsers, isRest }) => {
                 });
                 toast.success(response.data.message, { position: "bottom-right" });
                 dispatch(resetFilterValue());
-                if (currentPage === 1 && pageSize === 5 && isBulkDelete) {
+                if (currentPage === 1 && pageSize === 5) {
                     await fetchUser();
                 } else {
                     dispatch(ResetPaginationMetaData());

@@ -105,18 +105,18 @@ const Sidebar = () => {
                                         className="sidebar-nav-group-title hidden sm:inline "
                                         role="presentation"
                                     >
-                                        DRUTA VENTURES
+                                        st joseph's university
                                     </li>
                                     <li
                                         className="sidebar-nav-item"
                                         role="menuitem"
                                         onClick={() => navigate("/users")}
                                         tabIndex={0}
-                                        onKeyDown={(e) => e.key === "Enter" && navigate("/users")}
+                                        onKeyDown={(e) => e.key === "Enter" && navigate("/students")}
                                         aria-label="User Management"
                                     >
                                         <FaUsers aria-hidden="true" />{" "}
-                                        <span className="hidden sm:inline">User Management</span>
+                                        <span className="hidden sm:inline">Student Management</span>
                                     </li>
 
                                     <SidebarItem icon={FaLock} label="Security & Access" />

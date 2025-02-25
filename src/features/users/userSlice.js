@@ -9,7 +9,7 @@ const initialState = {
   allModalStatus: {
     addUserModalStatus: false,
     editUserModalStatus: false,
-    permissionUserModalStatus: false,
+    addMarkModalStatus: false,
     viewUserModalStatus: false,
     deleteUserModalStatus: false,
     bulkDeleteUserModalStatus: false,

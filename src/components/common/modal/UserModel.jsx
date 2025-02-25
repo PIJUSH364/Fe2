@@ -6,8 +6,6 @@ import InputField from "../Input/InputField";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useFetchUsers } from "../../custom/Hook/useFetchUsers";
-import { Role } from "../../../utils/method/helper";
-import SelectInputField from "../Input/SelectInputField";
 import {
     resetFilterValue,
     ResetPaginationMetaData,
@@ -53,7 +51,7 @@ const UserModel = ({ setShouldShow }) => {
 
     return (
         <Formik
-            initialValues={{ name: "", email: "", }}
+            initialValues={{ name: "", email: "" }}
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) => {
                 handleAddUser(values, setSubmitting);

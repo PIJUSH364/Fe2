@@ -6,48 +6,48 @@ import InputField from "../Input/InputField";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useFetchUsers } from "../../custom/Hook/useFetchUsers";
-import { useDispatch, useSelector } from "react-redux";
 import SelectInputField from "../Input/SelectInputField";
-import API_URLS from "../../../utils/constant/UrlConstant";
 import {
     resetFilterValue,
     ResetPaginationMetaData,
 } from "../../../features/users/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import API_URLS from "../../../utils/constant/UrlConstant";
+import { Subjects } from "../../../utils/method/helper";
 
-const UpdateUserModel = ({ setShouldShow }) => {
-    const [isLoading, setIsLoading] = useState(false);
-
-    const user = useSelector((state) => state.user.userDetails);
-    const { currentPage, pageSize } = useSelector(
-        (state) => state.user.paginationMetaData
-    );
+const CreateMarkModel = ({ setShouldShow }) => {
     const { fetchUser } = useFetchUsers();
+    const user = useSelector((state) => state.user.userDetails);
+
+    if (!user) {
+        setShouldShow(false);
+        return -1;
+    }
+
     const dispatch = useDispatch();
-    const { name, email, id } = user;
+    const [isLoading, setIsLoading] = useState(false);
 
     const validationSchema = Yup.object().shape({
         name: Yup.string().required("name is required"),
-        email: Yup.string()
-            .email("Invalid email address")
-            .required("Email is required"),
+        score: Yup.number()
+            .min(0, "Score must be greater than 0")
+            .max(100, "Score must be less than 100")
+            .required("score is required"),
+        subject: Yup.string().required("subject is required"),
     });
 
-    const handleUpdateUser = (values, setSubmitting) => {
+    const handleAddMark = (values, setSubmitting) => {
         setIsLoading((prev) => !prev);
         axios
-            .put(API_URLS.USER.UPDATE, { ...values, id })
+            .post(API_URLS.Mark.CREATE, values)
             .then(async (res) => {
-                setShouldShow(false);
                 toast.success(res.data.message, {
                     position: "bottom-right",
                 });
+                setShouldShow(false);
+                dispatch(ResetPaginationMetaData());
                 dispatch(resetFilterValue());
-
-                if (currentPage === 1 && pageSize === 5) {
-                    await fetchUser(1, 5);
-                } else {
-                    dispatch(ResetPaginationMetaData());
-                }
+                await fetchUser(1, 5);
             })
             .catch((err) => {
                 const message = err?.response?.data?.message || "Something went wrong";
@@ -62,12 +62,13 @@ const UpdateUserModel = ({ setShouldShow }) => {
     return (
         <Formik
             initialValues={{
-                name: name,
-                email: email,
+                name: user.name,
+                score: "",
+                subject: String(Subjects[0]).toLowerCase(),
             }}
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) => {
-                handleUpdateUser(values, setSubmitting);
+                handleAddMark({ ...values, studentId: user.id }, setSubmitting);
             }}
         >
             {({ isSubmitting }) => (
@@ -80,27 +81,31 @@ const UpdateUserModel = ({ setShouldShow }) => {
                         >
                             <AiOutlineClose />
                         </button>
-
                         <InputField
+                            disabled={true}
                             label="Name"
                             name="name"
                             placeholder="Enter your name"
-                            disabled={isLoading}
                         />
                         <InputField
-                            label="Email"
-                            name="email"
-                            type="email"
-                            placeholder="Enter your Email"
                             disabled={isLoading}
+                            label="Score"
+                            name="score"
+                            type="number"
+                            placeholder="Enter the score"
                         />
-
+                        <SelectInputField
+                            disabled={isLoading}
+                            label="Subject"
+                            name="subject"
+                            optionList={Subjects}
+                        />
                         <button
                             type="submit"
                             disabled={isLoading}
                             className={`modal_submit_btn ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
                         >
-                            {isLoading ? "Updating..." : "Update"}
+                            {isLoading ? "Saving..." : "Continue"}
                         </button>
                     </Form>
                 </div>
@@ -109,4 +114,4 @@ const UpdateUserModel = ({ setShouldShow }) => {
     );
 };
 
-export default UpdateUserModel;
+export default CreateMarkModel;

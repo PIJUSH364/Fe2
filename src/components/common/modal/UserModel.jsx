@@ -6,8 +6,6 @@ import InputField from "../Input/InputField";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useFetchUsers } from "../../custom/Hook/useFetchUsers";
-import { Role } from "../../../utils/method/helper";
-import SelectInputField from "../Input/SelectInputField";
 import {
     resetFilterValue,
     ResetPaginationMetaData,
@@ -26,13 +24,12 @@ const UserModel = ({ setShouldShow }) => {
         email: Yup.string()
             .email("Invalid email address")
             .required("Email is required"),
-        role: Yup.string().required("Role is required"),
     });
 
     const handleAddUser = (values, setSubmitting) => {
         setIsLoading((prev) => !prev);
         axios
-            .post(API_URLS.USER.CREATE, values)
+            .post(API_URLS.STUDENT.CREATE, values)
             .then(async (res) => {
                 toast.success(res.data.message, {
                     position: "bottom-right",
@@ -54,7 +51,7 @@ const UserModel = ({ setShouldShow }) => {
 
     return (
         <Formik
-            initialValues={{ name: "", email: "", role: "member" }}
+            initialValues={{ name: "", email: "" }}
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) => {
                 handleAddUser(values, setSubmitting);
@@ -83,12 +80,7 @@ const UserModel = ({ setShouldShow }) => {
                             type="email"
                             placeholder="Enter your Email"
                         />
-                        <SelectInputField
-                            disabled={isLoading}
-                            label="Role"
-                            name="role"
-                            optionList={Role}
-                        />
+
                         <button
                             type="submit"
                             disabled={isLoading}

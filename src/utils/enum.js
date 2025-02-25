@@ -1,7 +1,7 @@
 export const allModalStatus = {
   ADD_USER: "addUserModalStatus",
   EDIT_USER: "editUserModalStatus",
-  PERMISSION_CHANGE: "permissionUserModalStatus",
+  ADD_MARK: "addMarkModalStatus",
   VIEW_USER: "viewUserModalStatus",
   DELETE_USER: "deleteUserModalStatus",
   BULK_DELETE_USER: "bulkDeleteUserModalStatus",

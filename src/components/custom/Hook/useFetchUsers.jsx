@@ -28,7 +28,7 @@ export const useFetchUsers = () => {
                 if (searchValue) subQuery += `&search=${searchValue}`;
 
                 const defaultUrl =
-                    `${API_URLS.USER.PAGINATION_DATA}?page=${pageIndex}&pageSize=${pageSize}` +
+                    `${API_URLS.STUDENT.PAGINATION_DATA}?page=${pageIndex}&pageSize=${pageSize}` +
                     subQuery.toLowerCase();
 
                 const res = await axios.get(defaultUrl);

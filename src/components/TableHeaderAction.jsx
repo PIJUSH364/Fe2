@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { FiPlus } from "react-icons/fi";
-import { MdFilterList } from "react-icons/md";
 import { FaSearch } from "react-icons/fa";
 import Modal from "./common/modal/Modal";
 import UserModel from "./common/modal/UserModel";
@@ -11,22 +10,19 @@ import {
     setSearchValue,
 } from "../features/users/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import FilterUserModel from "./common/modal/FilterUserModel";
 import ResetButton from "./ResetButton";
 
 const TableHeaderAction = ({
-    title = "All User",
+    title = "All Students",
     setIsRest,
     setLocalPageSize,
 }) => {
     const dispatch = useDispatch();
     const totalUserCount = useSelector((state) => state.user.totalUserCount);
     const searchValue = useSelector((state) => state.user.searchValue);
-    const userList = useSelector((state) => state.user.userList);
 
     const [shouldShow, setShouldShow] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
-    const [isOpenFilterModel, setIsOpenFilterModel] = useState(false);
 
     const handleRest = () => {
         toast.success("Reset successfully");
@@ -37,16 +33,9 @@ const TableHeaderAction = ({
         setLocalPageSize(5);
     };
 
-    const handleFilter = () => {
-        setShouldShow(true);
-        setIsOpenFilterModel(true);
-        setIsOpen(false);
-    };
-
     const handleNewUser = () => {
         setIsOpen(true);
         setShouldShow(true);
-        setIsOpenFilterModel(false);
     };
 
     return (
@@ -54,12 +43,6 @@ const TableHeaderAction = ({
             {isOpen && (
                 <Modal shouldShow={shouldShow} setShouldShow={setShouldShow}>
                     <UserModel setShouldShow={setShouldShow} />
-                </Modal>
-            )}
-
-            {isOpenFilterModel && (
-                <Modal shouldShow={shouldShow} setShouldShow={setShouldShow}>
-                    <FilterUserModel setShouldShow={setShouldShow} />
                 </Modal>
             )}
 
@@ -85,23 +68,13 @@ const TableHeaderAction = ({
                     </div>
 
                     <div className="flex items-center gap-2">
-                        {/* Filter Button */}
-                        <button
-                            onClick={handleFilter}
-                            className={`primary-bw-btn px-2 md:px-4 ${userList.length === 0 ? "opacity-50" : ""}`}
-                            disabled={userList.length === 0}
-                        >
-                            <MdFilterList />
-                            Filter
-                        </button>
-
                         {/* Add User Button */}
                         <button
                             onClick={handleNewUser}
                             className="primary-bw-btn px-2 md:px-4 whitespace-nowrap"
                         >
                             <FiPlus />
-                            Add User
+                            Add Student
                         </button>
 
                         {/* Reset Button */}

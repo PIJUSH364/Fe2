@@ -8,7 +8,7 @@ import CloseModel from "./CloseModel";
 
 export default function ViewProfile({ setShouldShow }) {
     const user = useSelector((state) => state.user.userDetails);
-    const { name, email, status, createdAt, updatedAt, role } = user;
+    const { name, email, status, createdAt, updatedAt, marks } = user;
 
     return (
         <div className="modalBackground flex justify-center items-center">
@@ -42,23 +42,14 @@ export default function ViewProfile({ setShouldShow }) {
 
                 {/* Profile Details */}
                 <ul className="mt-3 divide-y rounded bg-gray-100 py-2 px-3 text-gray-600 shadow-sm hover:text-gray-700 hover:shadow">
-                    <li className="flex items-center py-3 text-sm">
-                        <span>Status</span>
-                        <span className="ml-auto">
-                            <span
-                                className={`rounded-full ${status == "active"
-                                    ? "bg-green-200 text-green-700"
-                                    : "bg-slate-200 text-slate-700"
-                                    }  py-1 px-2 text-xs font-medium`}
-                            >
-                                {capitalizeFirstLetter(status)}
-                            </span>
-                        </span>
-                    </li>
-                    <li className="flex items-center py-3 text-sm">
-                        <span>Role</span>
-                        <span className="ml-auto">{capitalizeFirstLetter(role)}</span>
-                    </li>
+                    {marks.map((mark, index) => {
+                        return (
+                            <li key={index} className="flex items-center py-3 text-sm">
+                                <span>{capitalizeFirstLetter(mark.subject)}</span>
+                                <span className="ml-auto">{mark.score}</span>
+                            </li>
+                        );
+                    })}
 
                     <li className="flex items-center py-3 text-sm">
                         <span>Last Active</span>

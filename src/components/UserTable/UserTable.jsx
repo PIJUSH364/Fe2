@@ -19,6 +19,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import API_URLS from "../../utils/constant/UrlConstant";
 import { CustomSkelton } from "../CustomSkelton";
+import CreateMarkModel from "../common/modal/CreateMarkModel";
 
 const UserTable = ({ selectedUsers, setSelectedUsers, isRest }) => {
     const [sortByDesc, setSortByDesc] = useState(true);
@@ -37,7 +38,7 @@ const UserTable = ({ selectedUsers, setSelectedUsers, isRest }) => {
     );
     const {
         editUserModalStatus,
-        permissionUserModalStatus,
+        addMarkModalStatus,
         viewUserModalStatus,
         bulkDeleteUserModalStatus,
         deleteUserModalStatus,
@@ -97,7 +98,7 @@ const UserTable = ({ selectedUsers, setSelectedUsers, isRest }) => {
         async (ids, isBulkDelete) => {
             try {
                 setIsLoading(true);
-                const response = await axios.delete(API_URLS.USER.DELETE, {
+                const response = await axios.delete(API_URLS.STUDENT.DELETE, {
                     data: { ids: [...ids] },
                 });
                 toast.success(response.data.message, { position: "bottom-right" });
@@ -153,9 +154,9 @@ const UserTable = ({ selectedUsers, setSelectedUsers, isRest }) => {
                     />
                 </Modal>
             )}
-            {permissionUserModalStatus && (
+            {addMarkModalStatus && (
                 <Modal shouldShow={shouldShow} setShouldShow={setShouldShow}>
-                    <UpdateUserModel
+                    <CreateMarkModel
                         setShouldShow={setShouldShow}
                         menuIndex={menuIndex}
                         permissionModal={true}
@@ -205,8 +206,8 @@ const UserTable = ({ selectedUsers, setSelectedUsers, isRest }) => {
                                         <th className="p-3 font-nunito whitespace-nowrap">
                                             User Name
                                         </th>
-                                        <th className="p-3 font-nunito ">Access</th>
-                                        <th className="p-3 font-nunito ">Status</th>
+                                        <th className="p-3 font-nunito text-left">Email</th>
+
                                         <th
                                             className="p-3 font-nunito cursor-pointer "
                                             onClick={() => {
@@ -234,18 +235,8 @@ const UserTable = ({ selectedUsers, setSelectedUsers, isRest }) => {
 
                                 {/* Scrollable Table Body */}
                                 <tbody className=" overflow-y-auto max-h-[300px] w-full cursor-pointer">
-                                    {users.map((user, index) => (
-                                        <UserRow
-                                            key={index}
-                                            user={user}
-                                            index={index}
-                                            toggleMenu={toggleMenu}
-                                            menuIndex={menuIndex}
-                                            setShouldShow={setShouldShow}
-                                            shouldShow={shouldShow}
-                                            onSelect={handleSelect}
-                                            isSelected={selectedUsers.includes(user.id)}
-                                        />
+                                    {users.map((user) => (
+                                        <UserRow user={user} setShouldShow={setShouldShow} />
                                     ))}
                                 </tbody>
                             </table>

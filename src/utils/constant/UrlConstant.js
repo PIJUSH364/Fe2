@@ -1,16 +1,23 @@
-const API_BASE_URL = `${import.meta.env.VITE_BASE_URL}/api/v1/`;
-const USER = "user";
+const API_BASE_URL = `${import.meta.env.VITE_BASE_URL}api/v1/`;
+const STUDENT = "student";
+const MARK = "mark";
 
 export const API_URLS = {
-  USER: {
-    CREATE: `${API_BASE_URL}${USER}/create_user`,
-    UPDATE: `${API_BASE_URL}${USER}/update_user`,
-    DELETE: `${API_BASE_URL}${USER}/delete_user`,
-    GET_BY_ID: (id) => `${API_BASE_URL}${USER}/get_user/${id}`,
-    GET_ALL: `${API_BASE_URL}${USER}/get_all_users`,
-    SEARCH: `${API_BASE_URL}${USER}/search_user_details`,
-    FILTER: `${API_BASE_URL}${USER}/filter_user_data`,
-    PAGINATION_DATA: `${API_BASE_URL}${USER}/get_user_data`,
+  STUDENT: {
+    CREATE: `${API_BASE_URL}${STUDENT}/create_student`,
+    UPDATE: `${API_BASE_URL}${STUDENT}/update_student`,
+    DELETE: `${API_BASE_URL}${STUDENT}/delete_student`,
+    GET_BY_ID: (id) => `${API_BASE_URL}${STUDENT}/get_student/${id}`,
+    GET_ALL: `${API_BASE_URL}${STUDENT}/get_all_students`,
+    SEARCH: `${API_BASE_URL}${STUDENT}/search_student_details`,
+    FILTER: `${API_BASE_URL}${STUDENT}/filter_student_data`,
+    PAGINATION_DATA: `${API_BASE_URL}${STUDENT}/get_student_data`,
+  },
+  Mark: {
+    CREATE: `${API_BASE_URL}${MARK}/create_mark`,
+    UPDATE: `${API_BASE_URL}${MARK}/update_mark`,
+    DELETE: `${API_BASE_URL}${MARK}/delete_mark`,
+    GET_BY_ID: (id) => `${API_BASE_URL}${MARK}/get_mark/${id}`,
   },
 };
 

@@ -11,17 +11,25 @@ import { useDispatch } from "react-redux";
 import { setModalStatus, setUserDetails } from "../../features/users/userSlice";
 import { allModalStatus } from "../../utils/enum";
 import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
 
 export default function DropDown({ children, setShouldShow, user }) {
   const dispatch = useDispatch();
-
   const handleExport = () => {
-    const userData = { ...user };
+
+    const allMarks = user.marks.reduce((acc, { subject, score }) => {
+      acc[subject] = score;
+      return acc;
+    }, {})
+
+    const userData = { ...user, ...allMarks };
+
     try {
       delete userData.id;
       delete userData.deletedAt;
       delete userData.createdAt;
       delete userData.updatedAt;
+      delete userData.marks;
 
       const worksheet = XLSX.utils.json_to_sheet([userData]);
       const workbook = XLSX.utils.book_new();
@@ -93,13 +101,13 @@ export default function DropDown({ children, setShouldShow, user }) {
                 setShouldShow(true);
                 dispatch(
                   setModalStatus({
-                    key: allModalStatus.PERMISSION_CHANGE,
+                    key: allModalStatus.ADD_MARK,
                     value: true,
                   })
                 );
               }}
             >
-              <FiSettings className="drop_down_button_icon" /> Change Permission
+              <FiSettings className="drop_down_button_icon" /> Add Mark
             </button>
           </DropdownMenu.Item>
 

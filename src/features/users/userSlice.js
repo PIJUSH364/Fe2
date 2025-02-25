@@ -74,9 +74,6 @@ const userSlice = createSlice({
     setCurrentPage: (state, action) => {
       state.currentPage = action.payload;
     },
-    setCategoryContactData: (state, action) => {
-      state.categoryContactData = action.payload;
-    },
     toggleUserDataLoader: (state, action) => {
       state.userDataLoader = action.payload;
     },
@@ -84,11 +81,6 @@ const userSlice = createSlice({
       state.filterData[action.payload.key] = action.payload.value;
     },
     resetFilterValue: (state) => {
-      state.filterData = {
-        role: "",
-        status: "",
-        search: "",
-      };
       state.searchValue = "";
     },
   },
